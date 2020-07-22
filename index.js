@@ -1,3 +1,4 @@
+const PORT = 5000;
 let app = require('express')();
 let http = require('http').createServer(app);
 //let io = require('socket.io')().listen(80);
@@ -24,7 +25,7 @@ io.on('connection', (socket) => {
     })
   });
 
-http.listen(3030, () => {
-  console.log('listening on *:3030');
+http.listen(PORT, () => {
+  console.log('listening *');
 });
 
