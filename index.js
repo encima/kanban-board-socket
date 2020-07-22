@@ -1,4 +1,4 @@
-const PORT = 5000;
+const PORT = process.env.PORT || 3030;
 let app = require('express')();
 let http = require('http').createServer(app);
 //let io = require('socket.io')().listen(80);
