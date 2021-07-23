@@ -3,16 +3,12 @@ let uid = require('uid');
 let app = require('express')();
 let http = require('http').createServer(app);
 //let io = require('socket.io')().listen(80);
+var datasets = require('./datasets');
 var cors = require('cors')
 let io = require('socket.io')(http);
 let listsOfCardsSaved = [];
 //let listsNamesSaved = [];
-let listsNamesSaved = [ {id: uid.uid(), name:'Backlog', cards:[]},
-     {id: uid.uid(), name: 'Next In', cards:[]},
-     {id: uid.uid(), name: 'In Progress', cards:[]},
-     {id: uid.uid(), name: 'Blocked', cards:[]},
-     {id: uid.uid(), name: 'Ready for Review', cards:[]},
-     {id: uid.uid(), name: 'Done', cards:[]}];
+let listsNamesSaved = datasets.exOne;
 
 app.use(cors());
 
@@ -23,6 +19,11 @@ app.get('/', (req, res) => {
 app.get('/api/clearLists', (req, res) => {
    listofNamesSaved = [];
    res.send(listofNamesSaved);
+});
+
+app.get('/api/sample', (req, res) => {
+  listofNamesSaved = datasets.exOne;
+  res.send(listofNamesSaved);
 });
 
 io.on('connection', (socket) => {
